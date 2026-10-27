@@ -1,0 +1,144 @@
+.page {
+    display: flex;
+    justify-content: center;
+    padding: clamp(2rem, 7vw, 5.5rem) 1.25rem;
+    background:
+        radial-gradient(ellipse at top left, rgb(217 232 203 / 60%), transparent 38rem),
+        #f7f6ef;
+}
+
+.card {
+    width: min(100%, 34rem);
+    padding: clamp(1.5rem, 5vw, 3rem);
+    border: 1px solid #e4e8dc;
+    border-radius: 1.5rem;
+    background: #fff;
+    box-shadow: 0 1.5rem 4rem rgb(38 54 31 / 10%);
+}
+
+.eyebrow {
+    margin: 0 0 0.75rem;
+    color: #657d4f;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.title {
+    margin: 0;
+    color: #263620;
+    font-size: clamp(1.8rem, 5vw, 2.4rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.15;
+}
+
+.description {
+    margin: 0.75rem 0 2rem;
+    color: #687064;
+    line-height: 1.6;
+}
+
+.form {
+    display: grid;
+    gap: 1.25rem;
+    max-width: none;
+    margin: 0;
+}
+
+.field {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.label {
+    color: #34402f;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.input {
+    width: 100%;
+    min-height: 3.1rem;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid #d9dfd2;
+    border-radius: 0.7rem;
+    background: #fcfcfa;
+    color: #263620;
+    font: inherit;
+    transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.input::placeholder {
+    color: #9a9f94;
+}
+
+.input:hover {
+    border-color: #aab99a;
+}
+
+.input:focus-visible {
+    border-color: #567744;
+    outline: none;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgb(86 119 68 / 18%);
+}
+
+.submit {
+    min-height: 3.25rem;
+    margin-top: 0.25rem;
+    padding: 0.8rem 1.25rem;
+    border: 0;
+    border-radius: 0.7rem;
+    background: #afb758;
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+    transition: background-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.submit:hover {
+    transform: translateY(-1px);
+    background: #3c592f;
+    box-shadow: 0 0.5rem 1.25rem rgb(60 89 47 / 20%);
+}
+
+.submit:focus-visible {
+    outline: 3px solid #91aa7d;
+    outline-offset: 3px;
+}
+
+.submit:active {
+    transform: translateY(0);
+}
+
+.submit:disabled {
+    cursor: wait;
+    opacity: 0.7;
+}
+
+.status {
+    margin: 0;
+    padding: 0.8rem 1rem;
+    border-radius: 0.7rem;
+    line-height: 1.5;
+}
+
+.statusSuccess {
+    background: #edf5e8;
+    color: #344f2d;
+}
+
+.statusError {
+    background: #fff0ed;
+    color: #8a3025;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .input,
+    .submit {
+        transition: none;
+    }
+}
