@@ -1,7 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
-//import prisma from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 
 // Función para obtener y limpiar el texto de un campo del formulario
 function obtenerTexto(formData, campo) {
