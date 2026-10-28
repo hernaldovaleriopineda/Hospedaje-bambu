@@ -1,7 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import prisma from "@/lib/prisma";
+//import prisma from "@/lib/prisma";
 
 // Función para obtener y limpiar el texto de un campo del formulario
 function obtenerTexto(formData, campo) {
@@ -64,7 +64,7 @@ export async function crearReserva(_estadoAnterior, formData) {
         return { status: "error", message: "La fecha de llegada no puede ser anterior a la fecha actual." };
     }
 
-    
+    /*    
     try {
         
         const reservaExistente = await prisma.reservarTodo.findFirst({
@@ -109,6 +109,7 @@ export async function crearReserva(_estadoAnterior, formData) {
             message: "No se pudo guardar la reserva. Inténtalo de nuevo más tarde.",
         };
     }
+    */
 
     redirect("/Pago");
 }
