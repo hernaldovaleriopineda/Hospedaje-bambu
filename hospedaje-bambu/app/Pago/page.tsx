@@ -2,7 +2,7 @@ import './PagoEstilos.css';
 
 function RealizarPago() {
   return (
-    <main className="payment-page">
+    <section className="payment-page">
       <section className="payment-card">
         <div className="payment-content">
           <div className="payment-info">
@@ -56,7 +56,7 @@ function RealizarPago() {
           </aside>
         </div>
       </section>
-    </main>
+    </section>
   );
 }
 

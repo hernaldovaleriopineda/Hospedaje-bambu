@@ -21,20 +21,19 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
+      lang="es"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-       
-        <header className="bg-yellow-800 text-white p-4">
-          <Navegacion/>
+        <header className="site-header">
+          <Navegacion />
         </header>
-        <main className="flex-1 flex flex-col items-center justify-center p-4">
+        <main className="site-main">
           {children}
         </main>
-        <footer className="bg-yellow-800 p-4 border-t  text-center">
-          <p className="text-sm text-white">
-            &copy; 2026 My Company. All rights reserved.
+        <footer className="site-footer">
+          <p>
+            &copy; 2026 Hospedaje Bambu. Todos los derechos reservados.
           </p>
         </footer>
       </body>

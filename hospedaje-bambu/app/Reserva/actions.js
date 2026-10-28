@@ -1,6 +1,7 @@
 "use server";
 
-//import { prisma } from "@/lib/prisma";
+import { redirect } from "next/navigation";
+import prisma from "@/lib/prisma";
 
 // Función para obtener y limpiar el texto de un campo del formulario
 function obtenerTexto(formData, campo) {
@@ -23,8 +24,10 @@ export async function crearReserva(_estadoAnterior, formData) {
     const nombre = obtenerTexto(formData, "nombre");
     const email = obtenerTexto(formData, "email");
     const cantidad = obtenerTexto(formData, "cantidad_personas");
-    const fechaLlegada = convertirFecha(obtenerTexto(formData, "fecha_llegada"));
-    const fechaSalida = convertirFecha(obtenerTexto(formData, "fecha_salida"));
+    const fechaLlegadaTexto = obtenerTexto(formData, "fecha_llegada");
+    const fechaSalidaTexto = obtenerTexto(formData, "fecha_salida");
+    const fechaLlegada = convertirFecha(fechaLlegadaTexto);
+    const fechaSalida = convertirFecha(fechaSalidaTexto);
     const cantidadPersonas = Number(cantidad);
 
     // Validaciones de los campos del formulario
@@ -50,38 +53,53 @@ export async function crearReserva(_estadoAnterior, formData) {
     }
 
     // Validar que la fecha de llegada no sea anterior a la fecha actual
-    const fechaActual = new Date();
-    fechaActual.setHours(0, 0, 0, 0); // Establecer la hora a medianoche para comparar solo la fecha
+    const ahora = new Date();
+    const fechaActual = [
+        ahora.getFullYear(),
+        String(ahora.getMonth() + 1).padStart(2, "0"),
+        String(ahora.getDate()).padStart(2, "0"),
+    ].join("-");
 
-    if (fechaLlegada < fechaActual) {
+    if (fechaLlegadaTexto < fechaActual) {
         return { status: "error", message: "La fecha de llegada no puede ser anterior a la fecha actual." };
-    }   
-
-    // Validar que la reserva no se solape con otra reserva existente
-    const reservasExistentes = await prisma.reservarTodo.findMany({
-        where: {
-            fecha_llegada: {
-                lte: fechaSalida
-            },
-            fecha_salida: {
-                gte: fechaLlegada
-            }
-        }
-    });
-
-    if (reservasExistentes.length > 0) {
-        return { status: "error", message: "Ya existe una reserva para las fechas seleccionadas." };
     }
 
-    // Guardar la reserva en la base de datos
+    
     try {
+        
+        const reservaExistente = await prisma.reservarTodo.findFirst({
+            where: {
+                FechaLlegada: {
+                    lt: fechaSalida,
+                },
+                OR: [
+                    {
+                        FechaSalida: {
+                            gt: fechaLlegada,
+                        },
+                    },
+                    {
+                        FechaSalida: null,
+                    },
+                ],
+            },
+            select: {
+                ID: true,
+            },
+        });
+
+        if (reservaExistente) {
+            return { status: "error", message: "Ya existe una reserva para las fechas seleccionadas." };
+        }
+        
+
         await prisma.reservarTodo.create({
             data: {
-                nombre: nombre,
-                email: email,
-                cantidad_personas: cantidadPersonas,
-                fecha_llegada: fechaLlegada,
-                fecha_salida: fechaSalida,
+                Correo: email,
+                Nombre: nombre,
+                cantidadPersonas: cantidadPersonas,
+                FechaLlegada: fechaLlegada,
+                FechaSalida: fechaSalida,
             },
         });
     } catch (error) {
@@ -92,5 +110,5 @@ export async function crearReserva(_estadoAnterior, formData) {
         };
     }
 
-    return { status: "success", message: "Tu solicitud de reserva fue enviada correctamente." };
+    redirect("/Pago");
 }

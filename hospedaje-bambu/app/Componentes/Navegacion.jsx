@@ -2,21 +2,18 @@ import Link from "next/link";
 
 export default function Navegacion() {
     return (
-        <nav className="flex justify-between items-center">
-            <div className="text-lg font-bold">Hospedaje Bambu</div>
-            <ul className="flex space-x-4">
+        <nav className="site-nav" aria-label="Navegación principal">
+            <Link href="/" className="site-brand">
+              Hospedaje Bambu
+            </Link>
+            <ul className="site-links">
               <li>
-                <Link href="/" className="hover:underline">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/Reserva" className="hover:underline">
+                <Link href="/Reserva">
                   Reserva
                 </Link>
               </li>
               <li>
-                <Link href="/Contacto" className="hover:underline">
+                <Link href="/Contacto">
                   Contacto
                 </Link>
               </li>
