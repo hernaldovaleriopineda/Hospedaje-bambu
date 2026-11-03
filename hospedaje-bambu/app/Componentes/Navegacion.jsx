@@ -19,8 +19,13 @@ export default function Navegacion() {
                 </Link>
               </li>
               <li>
-                <Link href="/Contacto">
-                  Contacto
+                <Link href="/#experiencias">
+                  Experiencias
+                </Link>
+              </li>
+              <li>
+                <Link href="/#ubicacion">
+                  Ubicación
                 </Link>
               </li>
             </ul>
