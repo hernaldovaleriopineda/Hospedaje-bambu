@@ -7,7 +7,7 @@ function Reserva() {
     return (
         <section className="page" aria-labelledby="reservation-title">
             <div className="card">
-                <p className="eyebrow">Hospedaje Bamboo</p>
+                <p className="eyebrow">Bambuk Bio</p>
                 <h1 className="title" id="reservation-title">
                     Reserva tu estadía
                 </h1>

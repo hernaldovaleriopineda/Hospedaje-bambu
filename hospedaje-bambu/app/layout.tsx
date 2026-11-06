@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Hospedaje Bambú | Naturaleza y descanso",
+  title: "Bambuk Bio | Hospedaje en Uvita de Osa",
   description:
-    "Descubre un refugio natural y elige entre cabaña, domo y rancho para tu próxima estadía.",
+    "Hospédate en Bamboo Hut, Domo 1 o Domo 2 en Uvita de Osa, cerca del Parque Nacional Marino Ballena.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

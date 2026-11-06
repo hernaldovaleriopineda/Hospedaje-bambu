@@ -3,7 +3,7 @@
     justify-content: center;
     padding: clamp(2rem, 7vw, 5.5rem) 1.25rem;
     background:
-        radial-gradient(ellipse at top left, rgb(225 255 31 / 48%), transparent 38rem),
+        radial-gradient(ellipse at top left, rgb(74 157 37 / 18%), transparent 38rem),
         var(--background);
 }
 
@@ -18,7 +18,7 @@
 
 .eyebrow {
     margin: 0 0 0.75rem;
-    color: #397425;
+    color: #326f20;
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.14em;
@@ -64,25 +64,25 @@
     padding: 0.75rem 0.9rem;
     border: 1px solid rgb(24 48 24 / 20%);
     border-radius: 0.7rem;
-    background: #fdfff8;
+    background: #fafbf6;
     color: var(--foreground);
     font: inherit;
     transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
 }
 
 .input::placeholder {
-    color: #63715e;
+    color: #687262;
 }
 
 .input:hover {
-    border-color: #459c36;
+    border-color: #4a9d25;
 }
 
 .input:focus-visible {
-    border-color: #459c36;
+    border-color: #4a9d25;
     outline: none;
     background: var(--surface);
-    box-shadow: 0 0 0 3px rgb(31 255 61 / 24%);
+    box-shadow: 0 0 0 3px rgb(74 157 37 / 20%);
 }
 
 .submit {
@@ -91,7 +91,7 @@
     padding: 0.8rem 1.25rem;
     border: 0;
     border-radius: 0.7rem;
-    background: #eef1d3;
+    background: #e6eedc;
     color: var(--foreground);
     cursor: pointer;
     font: inherit;
@@ -101,12 +101,12 @@
 
 .submit:hover {
     transform: translateY(-1px);
-    background: #d5fe41;
+    background: #d1e9b7;
     box-shadow: 0 0.5rem 1.25rem rgb(24 48 24 / 16%);
 }
 
 .submit:focus-visible {
-    outline: 3px solid #397425;
+    outline: 3px solid #326f20;
     outline-offset: 3px;
 }
 
@@ -127,7 +127,7 @@
 }
 
 .statusSuccess {
-    background: rgb(113 255 31 / 20%);
+    background: rgb(74 157 37 / 16%);
     color: #244e1f;
 }
 

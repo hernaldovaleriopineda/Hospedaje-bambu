@@ -1,7 +1,36 @@
 import Image from "next/image";
 import Link from "next/link";
+import AsistenciaFlotante from "./Componentes/AsistenciaFlotante";
 import CarruselEspacios from "./Componentes/CarruselEspacios";
+import ConsultaDisponibilidad from "./Componentes/ConsultaDisponibilidad";
 import "./Home.css";
+
+const accommodations = [
+  {
+    number: "01",
+    name: "Bamboo Hut",
+    detailId: "bamboo-hut",
+    description: "Una cabaña de bambú cálida y acogedora.",
+    image: "/imagenes/Cabaña redimensionada.jpg",
+    alt: "Cabaña Bamboo Hut rodeada de vegetación tropical",
+  },
+  {
+    number: "02",
+    name: "Domo 1",
+    detailId: "domo-1",
+    description: "Glamping privado para descansar en la naturaleza.",
+    image: "/imagenes/Domo 1/IMG_1270.jpeg",
+    alt: "Interior del Domo 1 con detalles naturales",
+  },
+  {
+    number: "03",
+    name: "Domo 2",
+    detailId: "domo-2",
+    description: "Una estadía diferente en un entorno tropical.",
+    image: "/imagenes/Domo 2/IMG_1260.jpeg",
+    alt: "Domo 2 y su terraza en medio de la naturaleza",
+  },
+];
 
 const bambooHutFeatures = [
   "Capacidad para 4 huéspedes",
@@ -88,7 +117,7 @@ export default function Home() {
         />
         <div className="home-hero-shade" />
         <div className="home-hero-content">
-          <p className="home-eyebrow">Hospedaje Bambú · Uvita de Osa</p>
+          <p className="home-eyebrow">Bambuk Bio · Uvita de Osa</p>
           <h1 className="home-title" id="home-title">
             Un refugio único entre la selva y el Pacífico.
           </h1>
@@ -102,13 +131,15 @@ export default function Home() {
             <Link className="home-button" href="/Reserva">
               Reserva tu estadía
             </Link>
-            <a className="home-text-link" href="#espacios">
-              Descubre nuestros espacios <span aria-hidden="true">↓</span>
+            <a className="home-text-link" href="#alojamientos">
+              Descubre nuestros alojamientos <span aria-hidden="true">↓</span>
             </a>
           </div>
         </div>
         <p className="home-hero-caption">Pacífico Sur · Costa Rica</p>
       </section>
+
+      <ConsultaDisponibilidad />
 
       <section className="home-intro" aria-labelledby="intro-title">
         <p className="section-eyebrow">Un descanso diferente</p>
@@ -133,11 +164,51 @@ export default function Home() {
         </p>
       </section>
 
-      <CarruselEspacios />
+      <section
+        className="home-accommodations-section"
+        id="alojamientos"
+        aria-labelledby="reconnect-title"
+      >
+        <div className="home-section-heading">
+          <div>
+            <p className="section-eyebrow">Descansa a tu manera</p>
+            <h2 id="reconnect-title">Alojamientos</h2>
+          </div>
+          <p>Elige entre nuestros tres espacios y encuentra tu lugar en Uvita.</p>
+        </div>
+        <div className="home-accommodations">
+          {accommodations.map((accommodation) => (
+            <Link
+              className="accommodation-card"
+              href={`/#${accommodation.detailId}`}
+              key={accommodation.name}
+            >
+              <Image
+                className="accommodation-image"
+                src={accommodation.image}
+                alt={accommodation.alt}
+                fill
+                sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 33vw"
+              />
+              <span className="accommodation-number">
+                {accommodation.number} <span>· Alojamiento</span>
+              </span>
+              <span className="accommodation-copy">
+                <span className="accommodation-name">{accommodation.name}</span>
+                <span className="accommodation-description">
+                  {accommodation.description}
+                </span>
+                <span className="accommodation-cta">
+                  Descubre tu próximo refugio <span aria-hidden="true">↗</span>
+                </span>
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       <section
         className="home-spaces"
-        id="espacios"
         aria-labelledby="spaces-title"
       >
         <div className="home-section-heading">
@@ -152,7 +223,7 @@ export default function Home() {
         </div>
 
         <div className="stay-list">
-          <article className="stay-card">
+          <article className="stay-card" id="bamboo-hut">
             <div className="stay-image-wrap">
               <Image
                 className="stay-image"
@@ -203,13 +274,13 @@ export default function Home() {
               </div>
          
                 
-              <span className="stay-image-label">02 · Glamping en la selva</span>
+              <span className="stay-image-label">02 / 03 · Glamping en la selva</span>
             </div>
             <div className="stay-content">
               <p className="section-eyebrow">Aventura con todo el confort</p>
               <h3>Domos Glamping de Lujo</h3>
               <p className="stay-description">
-                Exclusivos domos glamping diseñados para quienes buscan una
+                Dos exclusivos domos glamping diseñados para quienes buscan una
                 experiencia única que combine aventura, naturaleza y comodidad.
                 Ubicados en medio de jardines tropicales, permiten disfrutar de
                 la belleza natural de Uvita sin renunciar al confort. Su diseño
@@ -224,10 +295,14 @@ export default function Home() {
                 ))}
               </ul>
               <Link className="home-button home-button-dark" href="/Reserva">
-                Reservar un domo <span aria-hidden="true">↗</span>
+                Reservar Domo<span aria-hidden="true">↗</span>
               </Link>
             </div>
           </article>
+        </div>
+        <div className="dome-galleries">
+          <CarruselEspacios domo="Domo 1" />
+          <CarruselEspacios domo="Domo 2" />
         </div>
       </section>
 
@@ -297,6 +372,47 @@ export default function Home() {
       </section>
 
       <section
+        className="home-faq"
+        id="preguntas"
+        aria-labelledby="faq-title"
+      >
+        <div className="faq-heading">
+          <p className="section-eyebrow">Antes de tu viaje</p>
+          <h2 id="faq-title">Preguntas frecuentes</h2>
+          <p>Todo lo que necesitas saber para disfrutar tu estadía en Uvita.</p>
+        </div>
+        <div className="faq-list">
+          <details className="faq-item">
+            <summary>¿Dónde están ubicados?</summary>
+            <p>En el Parque Nacional Marino Ballena, Uvita de Osa.</p>
+          </details>
+          <details className="faq-item">
+            <summary>¿Cuánto se tarda de San José a Uvita?</summary>
+            <p>Entre 3 y 4 horas en auto.</p>
+          </details>
+          <details className="faq-item">
+            <summary>¿Cuál es la mejor época para visitar Bambuk Bio?</summary>
+            <p>
+              Es un destino maravilloso durante todo el año. La época seca, de
+              diciembre a abril, es ideal para disfrutar días soleados, playas
+              y actividades al aire libre. Durante la época verde, de mayo a
+              noviembre, podrá disfrutar exuberantes paisajes tropicales,
+              ríos, cascadas y una naturaleza llena de vida, además del
+              avistamiento de ballenas y delfines entre agosto y octubre.
+            </p>
+          </details>
+          <details className="faq-item">
+            <summary>¿Cuántos días conviene hospedarse?</summary>
+            <p>
+              Recomendamos hospedarse entre 3 y 4 noches para disfrutar
+              tranquilamente de todo lo que ofrece Uvita de Osa y sus
+              alrededores.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section
         className="home-location"
         id="ubicacion"
         aria-labelledby="location-title"
@@ -338,6 +454,24 @@ export default function Home() {
           Reserva tu estadía <span aria-hidden="true">↗</span>
         </Link>
       </section>
+
+      <section className="home-visit" aria-labelledby="visit-title">
+        <Image
+          className="visit-logo"
+          src="/imagenes/Logo sin fondo.png"
+          alt=""
+          width={220}
+          height={170}
+          sizes="(max-width: 600px) 150px, 220px"
+        />
+        <div className="visit-copy">
+          <p className="section-eyebrow">Uvita de Osa · Costa Rica</p>
+          <h2 id="visit-title">Visítanos</h2>
+          <p>¡Visítenos y viva la experiencia Bambuk Bio!</p>
+        </div>
+      </section>
+
+      <AsistenciaFlotante />
     </>
   );
 }
