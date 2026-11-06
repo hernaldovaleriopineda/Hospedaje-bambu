@@ -1,11 +1,18 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Navegacion() {
     return (
         <nav className="site-nav" aria-label="Navegación principal">
             <Link href="/" className="site-brand">
-              <span className="brand-mark" aria-hidden="true">✳</span>
-              <span className="brand-name">Hospedaje <strong>Bambú</strong></span>
+              <Image
+                className="brand-logo"
+                src="/imagenes/Logo sin fondo.png"
+                alt="Bambuk Bio"
+                width={160}
+                height={125}
+                priority
+              />
             </Link>
             <ul className="site-links">
               <li>
@@ -14,18 +21,28 @@ export default function Navegacion() {
                 </Link>
               </li>
               <li>
-                <Link href="/#espacios">
-                  Espacios
+                <Link href="/#alojamientos">
+                  Alojamientos
                 </Link>
               </li>
               <li>
-                <Link href="/#experiencias">
-                  Experiencias
+                <Link href="/#disponibilidad">
+                  Disponibilidad
+                </Link>
+              </li>
+              <li>
+                <Link href="/#preguntas">
+                  Preguntas
                 </Link>
               </li>
               <li>
                 <Link href="/#ubicacion">
                   Ubicación
+                </Link>
+              </li>
+              <li>
+                <Link href="/Contacto">
+                  Contacto
                 </Link>
               </li>
             </ul>

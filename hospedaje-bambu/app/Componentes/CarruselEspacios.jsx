@@ -3,39 +3,67 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
 
-const slides = [
-  {
-    image: "/imagenes/Cabaña redimensionada.jpg",
-    alt: "Cabaña ecológica de bambú entre jardines tropicales",
-    title: "Bamboo Hut",
-    detail: "Calidez natural para descansar en Uvita.",
-  },
-  {
-    image: "/imagenes/Domo redimensionada.jpg",
-    alt: "Domo glamping rodeado de jardines y palmeras",
-    title: "Domos Glamping de Lujo",
-    detail: "Una escapada diferente en medio de la naturaleza.",
-  },
-  {
-    image: "/imagenes/Rancho.jpg",
-    alt: "Terraza techada de bambú y jacuzzi privado del domo",
-    title: "Detalles para disfrutar",
-    detail: "Espacios privados pensados para relajarte.",
-  },
-];
+const domePhotos = {
+  "Domo 1": [
+    "IMG_1254.jpeg",
+    "IMG_1269.jpeg",
+    "IMG_1270.jpeg",
+    "IMG_1271.jpeg",
+    "IMG_1272.jpeg",
+    "IMG_1273.jpeg",
+    "IMG_1274.jpeg",
+    "IMG_1275.jpeg",
+    "IMG_1277.jpeg",
+    "IMG_9004.jpeg",
+    "IMG_9005.jpeg",
+    "IMG_9008.jpeg",
+    "IMG_9016.jpeg",
+    "IMG_9020.jpeg",
+    "IMG_9050.jpeg",
+    "IMG_9051.jpeg",
+  ],
+  "Domo 2": [
+    "IMG_1257.jpeg",
+    "IMG_1258.jpeg",
+    "IMG_1260.jpeg",
+    "IMG_1261.jpeg",
+    "IMG_1262.jpeg",
+    "IMG_1263.jpeg",
+    "IMG_1266.jpeg",
+    "IMG_1268.jpeg",
+    "IMG_8751.jpeg",
+    "IMG_8757.jpeg",
+    "IMG_9109.jpeg",
+    "IMG_9132.jpeg",
+  ],
+};
 
-export default function CarruselEspacios() {
+function getSlides(domo) {
+  return domePhotos[domo].map((photo, index) => ({
+    image: `/imagenes/${encodeURIComponent(domo)}/${photo}`,
+    alt: `Fotografía ${index + 1} de ${domo}`,
+    title: domo,
+    detail: `Conoce cada detalle de tu estadía · ${String(index + 1).padStart(2, "0")}`,
+  }));
+}
+
+export default function CarruselEspacios({ domo }) {
+  const slides = getSlides(domo);
   const carouselRef = useRef(null);
   const [activeSlide, setActiveSlide] = useState(0);
 
   function goToSlide(index) {
     const carousel = carouselRef.current;
-    if (!carousel) return;
-
     const nextIndex = (index + slides.length) % slides.length;
+    const slide = carousel?.children[nextIndex];
+    if (!carousel || !slide) return;
+
     carousel.scrollTo({
-      left: nextIndex * carousel.clientWidth,
-      behavior: "auto",
+      left:
+        carousel.scrollLeft +
+        slide.getBoundingClientRect().left -
+        carousel.getBoundingClientRect().left,
+      behavior: "smooth",
     });
     setActiveSlide(nextIndex);
   }
@@ -44,19 +72,32 @@ export default function CarruselEspacios() {
     const carousel = carouselRef.current;
     if (!carousel) return;
 
-    setActiveSlide(Math.round(carousel.scrollLeft / carousel.clientWidth));
+    const slides = Array.from(carousel.children);
+    const nearestSlide = slides.reduce(
+      (nearest, slide, index) => {
+        const distance = Math.abs(
+          slide.getBoundingClientRect().left -
+            carousel.getBoundingClientRect().left,
+        );
+        return distance < nearest.distance ? { index, distance } : nearest;
+      },
+      { index: 0, distance: Number.POSITIVE_INFINITY },
+    );
+
+    setActiveSlide(nearestSlide.index);
   }
 
   return (
     <section
       className="spaces-carousel-section"
-      aria-label="Galería de nuestros hospedajes"
+      id={domo.toLowerCase().replace(" ", "-")}
+      aria-label={`Galería de ${domo}`}
       aria-roledescription="carrusel"
     >
       <div className="spaces-carousel-heading">
         <div>
-          <p className="section-eyebrow">Un vistazo a tu próxima estadía</p>
-          <h2>Espacios para reconectar</h2>
+          <p className="section-eyebrow">Conoce cada detalle</p>
+          <h2>{domo}</h2>
         </div>
         <div className="carousel-controls">
           <button
@@ -83,7 +124,7 @@ export default function CarruselEspacios() {
         ref={carouselRef}
         onScroll={handleScroll}
         tabIndex={0}
-        aria-label="Imágenes de Bamboo Hut y Domos Glamping"
+        aria-label={`Imágenes de ${domo}`}
       >
         {slides.map((slide, index) => (
           <article
@@ -103,7 +144,6 @@ export default function CarruselEspacios() {
             <div className="spaces-carousel-shade" />
             <div className="spaces-carousel-caption">
               <p>{slide.detail}</p>
-              <h3>{slide.title}</h3>
             </div>
           </article>
         ))}

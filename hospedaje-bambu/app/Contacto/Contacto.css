@@ -1,0 +1,176 @@
+.contact-page {
+  flex: 1;
+}
+
+.contact-page .section-eyebrow {
+  margin: 0 0 0.75rem;
+  color: #4f882e;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.contact-visit-copy .home-button {
+  display: inline-flex;
+  min-height: 3.35rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.45rem;
+  border: 1px solid #173d27;
+  background: #173d27;
+  color: #fbfcf7;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 160ms ease;
+}
+
+.contact-visit-copy .home-button:hover {
+  background: #2f671e;
+}
+
+.contact-visit {
+  display: grid;
+  min-height: 36rem;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  background: #e6eedc;
+}
+
+.contact-visit-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(3rem, 7vw, 6rem) max(1.5rem, calc((100vw - 76rem) / 2));
+  padding-right: clamp(2rem, 5vw, 5rem);
+}
+
+.contact-visit-copy h1 {
+  margin: 0;
+  color: #173d27;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  line-height: 1.05;
+}
+
+.contact-visit-copy > p:not(.section-eyebrow) {
+  max-width: 36rem;
+  margin: 1.25rem 0 0;
+  color: #52644d;
+  font-size: 0.98rem;
+  line-height: 1.8;
+}
+
+.contact-visit-copy > .contact-visit-highlight {
+  color: #173d27;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.2rem, 2.2vw, 1.65rem);
+  line-height: 1.5;
+}
+
+.contact-visit-copy .home-button {
+  margin-top: 1.6rem;
+}
+
+.contact-info-panel {
+  display: grid;
+  align-content: center;
+  gap: 1.5rem;
+  min-height: 28rem;
+  margin: clamp(1.5rem, 4vw, 3.5rem) max(1.5rem, calc((100vw - 76rem) / 2)) clamp(1.5rem, 4vw, 3.5rem) 0;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background: #fafbf6;
+}
+
+.contact-info-list {
+  display: grid;
+  gap: 1.35rem;
+}
+
+.contact-info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: #173d27;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.contact-info-item:hover {
+  color: #4a9d25;
+}
+
+.contact-info-icon {
+  display: grid;
+  width: 2.8rem;
+  height: 2.8rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgb(23 61 39 / 18%);
+  border-radius: 50%;
+}
+
+.contact-info-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
+.contact-social {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid rgb(23 61 39 / 18%);
+}
+
+.contact-social .social-links {
+  margin: 0;
+}
+
+.contact-social-handle {
+  color: #173d27;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.contact-social-handle:hover {
+  color: #4a9d25;
+}
+
+.contact-visit-copy .home-button:focus-visible {
+  outline: 3px solid #4a9d25;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-visit-copy .home-button {
+    transition: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .contact-visit {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-visit-copy {
+    padding: 4rem 1.5rem;
+  }
+
+  .contact-info-panel {
+    min-height: auto;
+    margin: 0 1.5rem 2rem;
+  }
+}
